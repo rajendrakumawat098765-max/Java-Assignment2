@@ -1,1 +1,88 @@
 
+import java.io.*;
+abstract class Shape {
+    abstract void calculateArea();
+    abstract void calculatePerimeter();
+}
+class Circle extends Shape {
+    double radius;
+    Circle(double radius) {
+        this.radius = radius;
+    }
+    void calculateArea() {
+        double area = 3.14 * radius * radius;
+        System.out.println("Area of Circle: " + area);
+    }
+    void calculatePerimeter() {
+        double perimeter = 2 * 3.14 * radius;
+        System.out.println("Perimeter of Circle: " + perimeter);
+    }
+}
+class Rectangle extends Shape {
+    double length, breadth;
+    Rectangle(double length, double breadth) {
+        this.length = length;
+        this.breadth = breadth;
+    }
+    void calculateArea() {
+        double area = length * breadth;
+        System.out.println("Area of Rectangle: " + area);
+    }
+    void calculatePerimeter() {
+        double perimeter = 2 * (length + breadth);
+        System.out.println("Perimeter of Rectangle: " + perimeter);
+    }
+}
+class Triangle extends Shape {
+    double base, height;
+    double side1, side2, side3;
+    Triangle(double base, double height, double side1, double side2, double side3) {
+        this.base = base;
+        this.height = height;
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+    void calculateArea() {
+        double area = 0.5 * base * height;
+        System.out.println("Area of Triangle: " + area);
+    }
+    void calculatePerimeter() {
+        double perimeter = side1 + side2 + side3;
+        System.out.println("Perimeter of Triangle: " + perimeter);
+    }
+}
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Enter radius of circle: ");
+        double radius = Double.parseDouble(br.readLine());
+        System.out.print("Enter length of rectangle: ");
+        double length = Double.parseDouble(br.readLine());
+        System.out.print("Enter breadth of rectangle: ");
+        double breadth = Double.parseDouble(br.readLine());
+        System.out.print("Enter base of triangle: ");
+        double base = Double.parseDouble(br.readLine());
+        System.out.print("Enter height of triangle: ");
+        double height = Double.parseDouble(br.readLine());
+        System.out.print("Enter side 1 of triangle: ");
+        double side1 = Double.parseDouble(br.readLine());
+        System.out.print("Enter side 2 of triangle: ");
+        double side2 = Double.parseDouble(br.readLine());
+        System.out.print("Enter side 3 of triangle: ");
+        double side3 = Double.parseDouble(br.readLine());
+        Shape s[] = new Shape[3];
+        s[0] = new Circle(radius);
+        s[1] = new Rectangle(length, breadth);
+        s[2] = new Triangle(base, height, side1, side2, side3);
+        System.out.println("\nCircle");
+        s[0].calculateArea();
+        s[0].calculatePerimeter();
+        System.out.println("\nRectangle");
+        s[1].calculateArea();
+        s[1].calculatePerimeter();
+        System.out.println("\nTriangle");
+        s[2].calculateArea();
+        s[2].calculatePerimeter();
+    }
+}
