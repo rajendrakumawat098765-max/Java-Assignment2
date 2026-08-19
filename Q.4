@@ -1,0 +1,64 @@
+import java.io.*;
+abstract class Employee {
+    int employeeId;
+    String employeeName;
+    double basicSalary;
+    Employee(int employeeId, String employeeName, double basicSalary) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.basicSalary = basicSalary;
+    }
+    abstract double calculateSalary();
+    void display() {
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Employee Name: " + employeeName);
+        System.out.println("Basic Salary: " + basicSalary);
+        System.out.println("Net Salary: " + calculateSalary());
+    }
+}
+class PermanentEmployee extends Employee {
+    PermanentEmployee(int employeeId, String employeeName, double basicSalary) {
+        super(employeeId, employeeName, basicSalary);
+    }
+    double calculateSalary() {
+        double hra = basicSalary * 0.20;
+        double da = basicSalary * 0.40;
+        double pf = basicSalary * 0.12;
+        double grossSalary = basicSalary + hra + da;
+        double netSalary = grossSalary - pf;
+        return netSalary;
+    }
+}
+class ContractEmployee extends Employee {
+    ContractEmployee(int employeeId, String employeeName, double basicSalary) {
+        super(employeeId, employeeName, basicSalary);
+    double calculateSalary() {
+        double allowance = basicSalary * 0.10;
+        return basicSalary + allowance;
+    }
+}
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter Permanent Employee Details");
+        System.out.print("Enter Employee ID: ");
+        int id1 = Integer.parseInt(br.readLine());
+        System.out.print("Enter Employee Name: ");
+        String name1 = br.readLine();
+        System.out.print("Enter Basic Salary: ");
+        double salary1 = Double.parseDouble(br.readLine());
+        Employee e1 = new PermanentEmployee(id1, name1, salary1);
+        System.out.println("\nEnter Contract Employee Details");
+        System.out.print("Enter Employee ID: ");
+        int id2 = Integer.parseInt(br.readLine());
+        System.out.print("Enter Employee Name: ");
+        String name2 = br.readLine();
+        System.out.print("Enter Basic Salary: ");
+        double salary2 = Double.parseDouble(br.readLine());
+        Employee e2 = new ContractEmployee(id2, name2, salary2);
+        System.out.println("\nPermanent Employee");
+        e1.display();
+        System.out.println("\nContract Employee");
+        e2.display();
+    }
+}
